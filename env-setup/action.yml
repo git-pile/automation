@@ -1,0 +1,9 @@
+name: 'git-pile: env-setup'
+description: 'Set up environment with needed tools'
+author: 'Lucas De Marchi'
+runs:
+  using: 'composite'
+  steps:
+  - name: Install Python Dependencies
+    shell: bash
+    run: pip3 install git-pile
