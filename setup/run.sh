@@ -7,13 +7,25 @@ PILE_REF=$2
 RESULT_BRANCH=$3
 FETCH_BASELINE=$4
 
+
+echo "::group::Checkout pile/result branch"
 . config
-git pile destroy || true
+git pile destroy 2>/dev/null || true
 git pile init -p $PILE_BRANCH -b $BASELINE -r $RESULT_BRANCH
 git -C patches reset --hard $PILE_REF
+echo "::endgroup::"
 
-[ "$FETCH_BASELINE" == "true" ] && git fetch -f origin $BASELINE
-git branch -f $RESULT_BRANCH $BASELINE
+if [ "$FETCH_BASELINE" == "true" ]; then
+	echo "::group::Fetch baseline"
+	git fetch -f origin $BASELINE
+	echo "::endgroup::"
+fi
 
+
+git branch -f $RESULT_BRANCH $BASELINE 2>/dev/null
+
+echo "::group::genbranch"
 git pile genbranch -i
-git log
+echo "::endgroup::"
+
+git log --pretty=oneline --abbrev-commit
