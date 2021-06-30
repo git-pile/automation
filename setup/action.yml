@@ -1,0 +1,21 @@
+name: 'git-pile: setup'
+description: 'Set up branches environment with needed tools'
+author: 'Lucas De Marchi'
+inputs:
+  pile-branch-name:
+    description: 'Name for the pile branch'
+    default: 'pile'
+  pile-branch-ref:
+    description: 'Git sha to be used as pile branch'
+    required: false
+  result-branch-name:
+    description: 'Name for the result branch'
+    default: 'internal'
+  fetch-baseline:
+    description: 'If baseline needs to be fetched from remote'
+    default: 'true'
+runs:
+  using: 'composite'
+  steps:
+  - run: ${{ github.action_path }}/run.sh ${{ inputs.pile-branch-name }} ${{ inputs.pile-branch-ref }} ${{ inputs.result-branch-name }} ${{ inputs.fetch-baseline }}
+    shell: bash
