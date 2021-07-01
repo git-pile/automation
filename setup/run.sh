@@ -25,5 +25,3 @@ git branch -f $RESULT_BRANCH $BASELINE 2>/dev/null
 echo "::group::genbranch"
 git pile genbranch -i
 echo "::endgroup::"
-
-git log --pretty=oneline --abbrev-commit
