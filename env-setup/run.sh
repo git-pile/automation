@@ -4,13 +4,17 @@ set -eu
 
 VERSION=${1:-""}
 
-echo $VERSION
-
 if [[ $VERSION =~ ^[0-9].* ]]; then
-	VERSION="==$VERSION"
+	PKG="git-pile==$VERSION"
+elif [[ $VERSION =~ ^[/.].* ]]; then
+	PKG="${VERSION}/"
+elif [ -n "$VERSION" ]; then
+	PKG="git-pile$VERSION"
+else
+	PKG="git-pile"
 fi
 
-echo "::group::Install git-pile$VERSION"
+echo "::group::Install $PKG"
 pip install --force-reinstall wheel
-pip install --force-reinstall "git-pile$VERSION"
+pip install --force-reinstall $PKG
 echo "::endgroup::"
