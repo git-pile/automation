@@ -4,6 +4,9 @@ set -eu
 
 VERSION=${1:-""}
 
+# TODO: accept VERSION as @branch, so we fetch the remote by ourselves
+# and install git-pile from a specific branch
+
 if [[ $VERSION =~ ^[0-9].* ]]; then
 	PKG="git-pile==$VERSION"
 elif [[ $VERSION =~ ^[/.].* ]]; then
