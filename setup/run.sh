@@ -26,5 +26,5 @@ echo "::endgroup::"
 git branch -f $RESULT_BRANCH $BASELINE 2>/dev/null
 
 echo "::group::genbranch"
-git pile genbranch -i
+git pile genbranch -i -b $RESULT_BRANCH
 echo "::endgroup::"
